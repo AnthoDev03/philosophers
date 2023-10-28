@@ -1,40 +1,63 @@
-# COLORS
-GREEN = \033[0;32m
-RED = \033[0;31m
-RESET = \033[0m
+NAME 		:= philo
+INCS 		:= ./include
+SRC_DIR 	:= src
+SRCS 		:= main.c thread_handler.c state_handler.c utils.c
+SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
+BUILD_DIR 	:= .build
+OBJS 		:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+DEPS 		:= $(OBJS:.o=.d)
+CC 			:= gcc
+CFLAGS 		:= -g -Wall -Wextra -Werror -pthread
+CPPFLAGS 	:= $(addprefix -I,$(INCS)) -MMD -MP
+RM 			:= rm -rf
+MAKEFLAGS 	:= --no-print-directory
+DIR_DUP 	= mkdir -p $(@D)
 
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
+.PHONY: clean fclean re
+.SILENT:
 
-# INCLUDE: .h files or .a library folders
-# SRC: .c files
-SRC_DIR = src
-OBJ_DIR = obj
-INCLUDE_DIR = include
+# Rules ----------------------------------------------------------------------->
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
+all: header $(NAME)
 
-NAME = philo
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	${info }
+	${info ${BOLD}Creating -> ${YELLOW}$(NAME)${NO_COLOR}}
 
-.PHONY: all clean fclean re
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(DIR_DUP)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	${info ${BOLD}Compiling -> ${YELLOW}$@${NO_COLOR}}
 
-all: $(NAME)
-
-$(NAME): $(OBJ_FILES) $(LIBFT)
-	@$(CC) $(CFLAGS) -o $@ $^
-	@echo "$(GREEN)+ $(NAME)$(RESET)"
-
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c -o $@ $<
+-include $(DEPS)
 
 clean:
-	@$(RM) -r $(OBJ_DIR)
+	$(RM) $(BUILD_DIR)
+	${info }
+	${info ${BOLD}${YELLOW}Cleaning in progress...${NO_COLOR} 🧹 🧹 🧹}
 
 fclean: clean
-	@$(RM) $(NAME)
-	@echo "$(RED)- $(NAME)$(RESET)"
+	$(RM) $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
+
+# Style ----------------------------------------------------------------------->
+
+RED 		:= ${shell tput setaf 1}
+YELLOW		:= ${shell tput setaf 3}
+BLUE		:= ${shell tput setaf 4}
+NO_COLOR	:= ${shell tput sgr0}
+BOLD		:= ${shell tput bold}
+
+header: 
+	${info ${YELLOW}}	
+	${info █████████████████████████████████████████████████████████████████ }
+	${info █▄─▄▄─█─█─█▄─▄█▄─▄███─▄▄─█─▄▄▄▄█─▄▄─█▄─▄▄─█─█─█▄─▄▄─█▄─▄▄▀█─▄▄▄▄█ }
+	${info ██─▄▄▄█─▄─██─███─██▀█─██─█▄▄▄▄─█─██─██─▄▄▄█─▄─██─▄█▀██─▄─▄█▄▄▄▄─█ }
+	${info ▀▄▄▄▀▀▀▄▀▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▀▀▀▄▀▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀ }
+	${info ${NO_COLOR}}
+
+# ------------------------------------------------------------------------------e: fclean all
