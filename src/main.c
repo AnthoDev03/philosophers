@@ -1,5 +1,13 @@
 #include "../include/philo.h"
 
+unsigned long get_time_elapsed(t_philo *philo) {
+    struct timeval current_time;
+
+    gettimeofday(&current_time, NULL);
+    return (current_time.tv_sec - philo->start_time.tv_sec) * 1000 + 
+           (current_time.tv_usec - philo->start_time.tv_usec) / 1000;
+}
+
 static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
 {
 	t_philo	*philo;

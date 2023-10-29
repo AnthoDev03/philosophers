@@ -66,11 +66,3 @@ int	error_handler(char *msg, t_global *g, t_philo *philo, t_fork *forks)
 	clean_exit(g, philo, forks);
 	return (EXIT_FAILURE);
 }
-
-
-unsigned long get_time_elapsed(t_philo *philo) {
-    struct timeval current_time;
-    gettimeofday(&current_time, NULL);
-    return (current_time.tv_sec - philo->start_time.tv_sec) * 1000 + 
-           (current_time.tv_usec - philo->start_time.tv_usec) / 1000;
-}
