@@ -35,9 +35,6 @@
 # define LEFT_FORK	-42
 # define RIGHT_FORK 42
 
-# define RED_BOLD	"\033[1;31m"
-# define RESET		"\x1b[0m"
-
 // Structures ----------------------------------------------------------------->
 
 typedef struct s_fork

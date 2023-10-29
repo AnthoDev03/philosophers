@@ -9,7 +9,7 @@
 /*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "philo.h"
+#include "../include/philo.h"
 
 time_t	get_timestamp(void)
 {
@@ -72,10 +72,8 @@ int	clean_exit(t_global *g, t_philo *philo, t_fork *forks)
 
 int	error_handler(char *msg, t_global *g, t_philo *philo, t_fork *forks)
 {
-	write(2, RED_BOLD, 7);
 	while (*msg)
 		write(2, &*msg++, 1);
-	write(2, RESET, 4);
 	clean_exit(g, philo, forks);
 	return (EXIT_FAILURE);
 }

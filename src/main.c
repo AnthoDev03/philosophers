@@ -9,7 +9,7 @@
 /*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "philo.h"
+#include "../include/philo.h"
 
 static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
 {
