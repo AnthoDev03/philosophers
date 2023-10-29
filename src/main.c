@@ -59,8 +59,8 @@ static bool	args_init(t_args *a, int argc, char **argv)
 	a->n_loop = -2;
 	if (argc == 6)
 		a->n_loop = get_input_value(argv[5]);
-	if (a->n_philo == -1 || a->time_to_die == -1 || a->time_to_eat \
-		== -1 || a->time_to_sleep == -1 || a->n_loop == -1)
+	if (a->n_philo < 0 || a->time_to_die < 0 || a->time_to_eat \
+		< 0 || a->time_to_sleep < 0 || a->n_loop < -2 || a->n_loop == -1 || a->n_loop == 0)
 		return (false);
 	return (true);
 }

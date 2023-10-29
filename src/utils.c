@@ -18,25 +18,31 @@ int	someone_died(t_philo *philo)
 	return (state);
 }
 
-int	get_input_value(char *s)
+int	get_input_value(char *str)
 {
-	int	n;
+int neg;
+	int num;
+	int i;
 
-	n = -1;
-	while (*s == 32)
-		s++;
-	if (*s == 45 || (*s != 43 && (*s < 48 || *s > 57)))
-		return (n);
-	if (*s == 43)
-		s++;
-	while (*s >= 48 && *s <= 57)
+	i = 0;
+	neg = 1;
+	num = 0;
+	while (str[i] <= ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (n == -1)
-			n = 0;
-		n = n * 10 + *s - 48;
-		s++;
+		if (str[i] == '-')
+		{
+			neg *= -1;
+		}
+		i++;
 	}
-	return (n);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + (str[i] - 48);
+		i++;
+	}
+	return (num * neg);
 }
 
 int	clean_exit(t_global *g, t_philo *philo, t_fork *forks)
