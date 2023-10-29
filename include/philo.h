@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 12:56:38 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -72,6 +61,7 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	bool			right_fork_state;
 	bool			left_fork_state;
+  struct timeval start_time;
 }	t_philo;
 
 // Functions ------------------------------------------------------------------>
@@ -84,5 +74,5 @@ time_t	get_timestamp(void);
 int		get_input_value(char *s);
 int		clean_exit(t_global *g, t_philo *philo, t_fork *forks);
 int		error_handler(char *msg, t_global *g, t_philo *philo, t_fork *forks);
-
+unsigned long get_time_elapsed(t_philo *philo); 
 #endif

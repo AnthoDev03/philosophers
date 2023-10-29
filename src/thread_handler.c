@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 12:56:38 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "../include/philo.h"
 
 static void	take_fork(char which_fork, t_philo *philo)
@@ -34,7 +23,7 @@ static void	take_fork(char which_fork, t_philo *philo)
 		*fork_state = UP;
 		pthread_mutex_lock(&(philo->g->print_mutex));
 		if (!someone_died(philo))
-			printf("%ld %d has taken a fork\n", get_timestamp(), philo->id);
+			printf("%ld %d has taken a fork\n", get_time_elapsed(philo), philo->id);
 		pthread_mutex_unlock(&(philo->g->print_mutex));
 	}
 }

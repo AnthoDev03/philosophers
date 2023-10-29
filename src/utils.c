@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 12:56:38 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "../include/philo.h"
 
 time_t	get_timestamp(void)
@@ -76,4 +65,12 @@ int	error_handler(char *msg, t_global *g, t_philo *philo, t_fork *forks)
 		write(2, &*msg++, 1);
 	clean_exit(g, philo, forks);
 	return (EXIT_FAILURE);
+}
+
+
+unsigned long get_time_elapsed(t_philo *philo) {
+    struct timeval current_time;
+    gettimeofday(&current_time, NULL);
+    return (current_time.tv_sec - philo->start_time.tv_sec) * 1000 + 
+           (current_time.tv_usec - philo->start_time.tv_usec) / 1000;
 }

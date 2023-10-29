@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 12:56:38 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "../include/philo.h"
 
 static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
@@ -35,6 +24,7 @@ static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
 		philo->right_fork_state = DOWN;
 		philo->left_fork_state = DOWN;
 		pthread_mutex_init(&(philo->left_fork->fork_mutex), NULL);
+    gettimeofday(&(philo->start_time), NULL); // Ajouté ici
 	}
 	return (true);
 }

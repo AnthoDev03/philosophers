@@ -1,21 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 12:56:38 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/04/14 13:47:22 by anthrodr         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "../include/philo.h"
 
 static void	*eat_state(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->g->print_mutex));
 	if (!someone_died(philo))
-		printf("%ld %d is eating\n", get_timestamp(), philo->id);
+		printf("%ld %d is eating\n", get_time_elapsed(philo), philo->id);
 	pthread_mutex_unlock(&(philo->g->print_mutex));
 	pthread_mutex_lock(&(philo->g->philo_mutex));
 	philo->last_meal = get_timestamp();
@@ -31,7 +20,7 @@ static void	*sleep_state(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->g->print_mutex));
 	if (!someone_died(philo))
-		printf("%ld %d is sleeping\n", get_timestamp(), philo->id);
+		printf("%ld %d is sleeping\n", get_time_elapsed(philo), philo->id);
 	pthread_mutex_unlock(&(philo->g->print_mutex));
 	usleep(philo->g->a.time_to_sleep);
 	return (NULL);
@@ -41,7 +30,7 @@ static void	*think_state(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->g->print_mutex));
 	if (!someone_died(philo))
-		printf("%ld %d is thinking\n", get_timestamp(), philo->id);
+		printf("%ld %d is thinking\n", get_time_elapsed(philo), philo->id);
 	pthread_mutex_unlock(&(philo->g->print_mutex));
 	return (NULL);
 }
@@ -52,7 +41,7 @@ static void	*dead_state(t_philo *philo, t_global *g)
 	g->someone_died = true;
 	pthread_mutex_unlock(&(g->death_mutex));
 	pthread_mutex_lock(&((*philo).g->print_mutex));
-	printf("%ld %d died\n", get_timestamp(), (*philo).id);
+	printf("%ld %d died\n", get_time_elapsed(philo), (*philo).id);
 	pthread_mutex_unlock(&((*philo).g->print_mutex));
 	return (NULL);
 }
