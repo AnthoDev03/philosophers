@@ -1,4 +1,4 @@
-NAME = philosophers
+NAME = philo
 
 CFLAGS = -Wall -Wextra -Werror -pthread 
 
