@@ -6,7 +6,7 @@
 /*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 07:43:06 by anthrodr          #+#    #+#             */
-/*   Updated: 2023/10/30 07:51:45 by anthrodr         ###   ########.fr       */
+/*   Updated: 2023/10/30 08:16:11 by anthrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/philo.h"
@@ -45,6 +45,8 @@ static void	put_fork(char which_fork, t_philo *philo)
 	bool	*fork_state;
 	t_fork	*fork;
 
+	fork_state = NULL;
+	fork = NULL;	
 	if (which_fork == LEFT_FORK)
 	{
 		fork_state = &(philo->right_fork_state);

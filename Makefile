@@ -1,20 +1,21 @@
 NAME = philosophers
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread 
 
-RM = rm -rf
+RM = rm -f
 
-SRCS 		:= src/main.c src/thread_handler.c src/state_handler.c src/utils.c
+SRCS := src/main.c src/thread_handler.c src/state_handler.c src/utils.c
+OBJS := $(SRCS:.c=.o)
 
-$(NAME) :
-	gcc $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	    gcc $(CFLAGS) $(OBJS) -o $(NAME)
 
-all : $(NAME)
+all: $(NAME)
 
-fclean : clean
-	$(RM) $(NAME)
+fclean: clean
+	    $(RM) $(NAME)
 
-clean :
-	$(RM) $(NAME)
+clean:
+	    $(RM) $(OBJS)
 
-re : fclean all
+re: fclean all
