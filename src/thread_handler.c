@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 07:43:06 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/10/30 07:51:45 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../include/philo.h"
 
 static void	take_fork(char which_fork, t_philo *philo)
@@ -23,7 +34,8 @@ static void	take_fork(char which_fork, t_philo *philo)
 		*fork_state = UP;
 		pthread_mutex_lock(&(philo->g->print_mutex));
 		if (!someone_died(philo))
-			printf("%ld %d has taken a fork\n", get_time_elapsed(philo), philo->id);
+			printf("%ld %d has taken a fork\n", get_time_elapsed(philo),
+				philo->id);
 		pthread_mutex_unlock(&(philo->g->print_mutex));
 	}
 }
@@ -111,7 +123,7 @@ bool	thread_handler(t_global *g, t_philo **philos)
 	i = -1;
 	while (++i < g->a.n_philo)
 	{
-		if (pthread_create(&((*philos)[i].t_philosopher), NULL, \
+		if (pthread_create(&((*philos)[i].t_philosopher), NULL,
 			philosopher_routine, &((*philos)[i])))
 			return (false);
 	}

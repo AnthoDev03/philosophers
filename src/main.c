@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 07:42:47 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/10/30 07:50:21 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../include/philo.h"
 
-unsigned long get_time_elapsed(t_philo *philo) {
-    struct timeval current_time;
+unsigned long	get_time_elapsed(t_philo *philo)
+{
+	struct timeval	current_time;
 
-    gettimeofday(&current_time, NULL);
-    return (current_time.tv_sec - philo->start_time.tv_sec) * 1000 + 
-           (current_time.tv_usec - philo->start_time.tv_usec) / 1000;
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec - philo->start_time.tv_sec) * 1000
+		+ (current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 }
 
 static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
@@ -32,7 +44,7 @@ static bool	philo_init(t_global *g, t_philo **philos, t_fork **forks)
 		philo->right_fork_state = DOWN;
 		philo->left_fork_state = DOWN;
 		pthread_mutex_init(&(philo->left_fork->fork_mutex), NULL);
-    gettimeofday(&(philo->start_time), NULL); // Ajouté ici
+		gettimeofday(&(philo->start_time), NULL);
 	}
 	return (true);
 }
@@ -59,8 +71,9 @@ static bool	args_init(t_args *a, int argc, char **argv)
 	a->n_loop = -2;
 	if (argc == 6)
 		a->n_loop = get_input_value(argv[5]);
-	if (a->n_philo < 0 || a->time_to_die < 0 || a->time_to_eat \
-		< 0 || a->time_to_sleep < 0 || a->n_loop < -2 || a->n_loop == -1 || a->n_loop == 0)
+	if (a->n_philo < 0 || a->time_to_die < 0 || a->time_to_eat < 0
+		|| a->time_to_sleep < 0 || a->n_loop < -2 || a->n_loop == -1
+		|| a->n_loop == 0)
 		return (false);
 	return (true);
 }

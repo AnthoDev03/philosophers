@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 07:43:27 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/10/30 07:43:31 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../include/philo.h"
 
 time_t	get_timestamp(void)
@@ -20,9 +31,9 @@ int	someone_died(t_philo *philo)
 
 int	get_input_value(char *str)
 {
-int neg;
-	int num;
-	int i;
+	int	neg;
+	int	num;
+	int	i;
 
 	i = 0;
 	neg = 1;

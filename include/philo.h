@@ -1,27 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 07:42:05 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/10/30 07:47:12 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef PHILO_H
 # define PHILO_H
 
 // Libraries ------------------------------------------------------------------>
 
-# include <unistd.h>
+# include <pthread.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <string.h>
-# include <pthread.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 // Macros --------------------------------------------------------------------->
 
-# define THINK		0
-# define EAT		1
-# define SLEEP		2
-# define DEAD		3
+# define THINK 0
+# define EAT 1
+# define SLEEP 2
+# define DEAD 3
 
-# define UP			1
-# define DOWN		0
+# define UP 1
+# define DOWN 0
 
-# define LEFT_FORK	-42
+# define LEFT_FORK -42
 # define RIGHT_FORK 42
 
 // Structures ----------------------------------------------------------------->
@@ -29,7 +40,7 @@
 typedef struct s_fork
 {
 	pthread_mutex_t	fork_mutex;
-}	t_fork;
+}					t_fork;
 
 typedef struct s_args
 {
@@ -38,7 +49,7 @@ typedef struct s_args
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
 	int				n_loop;
-}	t_args;
+}					t_args;
 
 typedef struct s_global
 {
@@ -48,7 +59,7 @@ typedef struct s_global
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	philo_mutex;
-}	t_global;
+}					t_global;
 
 typedef struct s_philo
 {
@@ -61,18 +72,19 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	bool			right_fork_state;
 	bool			left_fork_state;
-  struct timeval start_time;
-}	t_philo;
+	struct timeval	start_time;
+}					t_philo;
 
 // Functions ------------------------------------------------------------------>
 
-bool	thread_handler(t_global *g, t_philo **philos);
-void	*state_handler(char state, t_philo *philo, t_global *g);
+bool				thread_handler(t_global *g, t_philo **philos);
+void				*state_handler(char state, t_philo *philo, t_global *g);
 
-int		someone_died(t_philo *philo);
-time_t	get_timestamp(void);
-int		get_input_value(char *s);
-int		clean_exit(t_global *g, t_philo *philo, t_fork *forks);
-int		error_handler(char *msg, t_global *g, t_philo *philo, t_fork *forks);
-unsigned long get_time_elapsed(t_philo *philo); 
+int					someone_died(t_philo *philo);
+time_t				get_timestamp(void);
+int					get_input_value(char *s);
+int					clean_exit(t_global *g, t_philo *philo, t_fork *forks);
+int					error_handler(char *msg, t_global *g, t_philo *philo,
+						t_fork *forks);
+unsigned long		get_time_elapsed(t_philo *philo);
 #endif
