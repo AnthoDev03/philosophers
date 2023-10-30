@@ -1,6 +1,6 @@
 NAME = philosophers
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 RM = rm -rf
 
